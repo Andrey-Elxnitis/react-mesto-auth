@@ -1,0 +1,18 @@
+.element__like {
+    width: 21px;
+    height: 18px;
+    background: none;
+    border: none;
+    margin-right: 7px;
+    background-image: url(../../../images/Group.png);
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.element__like:hover {
+    opacity: 0.6;
+}
+
+.element__like:focus {
+    outline: none;
+}

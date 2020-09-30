@@ -1,0 +1,5 @@
+.element__interactivity {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+}

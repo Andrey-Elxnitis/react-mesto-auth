@@ -1,0 +1,7 @@
+@import url(./__title/infotooltip__title.css);
+@import url(./__image/infotooltip__image.css);
+
+.infotooltip {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}

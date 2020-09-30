@@ -1,0 +1,10 @@
+.element__text {
+    max-width: 246px;
+    margin-top: 25px;
+    margin-left: 21px;
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 1;
+}

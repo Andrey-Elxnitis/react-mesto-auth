@@ -1,0 +1,22 @@
+.element__delete {
+    border: none;
+    background: none;
+    width: 18px;
+    height: 19px;
+    background-image: url(../../../images/like-delete.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    z-index: 2;
+    cursor: pointer;
+    display: none;
+}
+
+.element__delete:hover {
+    opacity: 0.6;
+}
+
+.element__delete:focus {
+    outline: none;
+}

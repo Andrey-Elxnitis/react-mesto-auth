@@ -1,0 +1,13 @@
+.element__image {
+    width: 282px;
+    min-height: 282px;
+    max-height: 282px;
+    z-index: 1;
+    position: relative;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.element__image:hover {
+    opacity: 0.8;
+}
