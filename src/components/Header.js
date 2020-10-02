@@ -1,25 +1,31 @@
 import React from 'react';
 import logo from '../images/logo.png';
-import { NavLink, Route, BrowserRouter } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 
 function Header(props) {
+
+  const {
+    user,
+    onSignOut,
+  } = props
 
   //возвращаем разметку шапки сайта
   return (
       <header className="header">
         <div className="header__logo" style={{backgroundImage: `url(${logo})`}}></div>
         <nav className="header__navigation">
-          <BrowserRouter>
           <Route path="/sign-up">
-            <NavLink to="/sign-in" className="header__link">Войти</NavLink>
+            <Link to="/sign-in" className="header__link">Войти</Link>
           </Route>
           <Route path="/sign-in">
-            <NavLink to="/sign-up" className="header__link">Зарегистрироваться</NavLink>
+            <Link to="/sign-up" className="header__link">Регистрация</Link>
           </Route>
-          <Route path="/cards">
-            <p className=""></p>
+          <Route exact path="/">
+            <div className="header__info">
+              <p className="header__email">{user}</p>
+              <button className="header__button" onClick={onSignOut} type="button">Выйти</button>
+            </div>
           </Route>
-          </BrowserRouter>
         </nav>
       </header>
     );

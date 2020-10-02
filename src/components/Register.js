@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 function Register(props) {
 
+    const {
+      onSignup
+    } = props
+
     //email и password пользователя состояние изначально пустая строка
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -20,7 +24,7 @@ function Register(props) {
     // функция для отправки данных
     function handleSubmitRegister(e) {
         e.preventDefault();
-        props.onSignup(email, password)
+        onSignup(email, password)
     }
 
     return (
@@ -43,7 +47,7 @@ function Register(props) {
               required
             />
             <button className="popup__button login__button" type="submit">Зарегистрироваться</button>
-            <Link to='/sign-up' className="login__link">Уже зарегистрированы? Войти</Link>  
+            <Link to='/sign-in' className="login__link">Уже зарегистрированы? Войти</Link>  
 
         </form>
     )

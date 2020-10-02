@@ -1,9 +1,16 @@
 .login__link {
-    width: 358px;
+    font-family: 'Inter', 'Arial', sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
     text-decoration: none;
     color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.login__link:hover {
+    opacity: 0.6;
 }

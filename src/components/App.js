@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Switch, useHistory, BrowserRouter, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js'
@@ -33,14 +33,17 @@ function App() {
     name: ''
   });
 
+  // история для переброски пользователя
+  let history = useHistory();
+
+  //стейт переменная для хранения email пользователя
+  const [user, setUser] = useState('');
+
   //стейт-переменная для отображения "сохранение..."
   const [isLoading, setIsLoading] = useState(false);
 
   // состояние пользователя авторизации
   const [loggedIn, setLoggedIn] = React.useState(false);
-
-  // история для переброски пользователя
-  const history = useHistory();
 
   // Закрытие попапов при клике на Esc и на overlay
   React.useEffect(() => {
@@ -217,12 +220,12 @@ function App() {
       saveToken(jwt)
       .then((res) => {
         if (res) {
-          //  ПРОРАБОТОАТЬ!!! setCurrenUser(res.data.email)
+          setUser(res.data.email)
           setLoggedIn(true);
-          history.push('/cards');
-
+          history.push('/');
         }
-      });
+      })
+      .catch((err) => console.log(err));
     }
   }
 
@@ -243,7 +246,7 @@ function App() {
   // функция отвечает за выход пользователя из прилажения
   function exitAuth() {
     localStorage.removeItem('jwt');
-    // ПРОРАБОТАТЬ!!! setCurrenUser('')
+    setUser('')
     setLoggedIn(false);
     history.push('/sign-in');
   }
@@ -253,14 +256,16 @@ function App() {
     authorize(email, password)
     .then((res) => {
       localStorage.setItem('jwt', res.token);
-     // setCurrenUser(email);
+      setUser(email);
       setEmail('');
       setPassword('');
       updateLogin();
-      history.push('/cards');
-      updateInfoTooltip();
+      history.push('/')
     })
-    .catch((err) => updateInfoTooltip());
+    .catch((err) => {
+      updateInfoTooltip();
+      console.log(err);
+    });
   } 
 
   // функция отвечает за регистрацию пользователя
@@ -268,10 +273,15 @@ function App() {
     register(email, password)
     .then((res) => {
       if (res) {
-        history.push('/cards');
+        history.push('/');
+        setLoggedIn(true);
+        updateInfoTooltip();
       }
     })
-    .catch((err) => updateInfoTooltip());
+    .catch((err) => {
+      updateInfoTooltip()
+      console.log(err);
+    });
   }
 
   //возвращаем разметку страницы, которую добавляем в DOM
@@ -280,11 +290,10 @@ function App() {
 
     <div className="page">
 
-    <Header />
-
-    <BrowserRouter>
+    <Header onSignOut={exitAuth} user={user} />
+    
     <Switch>
-      <ProtectedRoute path="/cards" component={Main} loggedIn={loggedIn}
+      <ProtectedRoute exact path="/" component={Main} loggedIn={loggedIn}
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
@@ -299,10 +308,9 @@ function App() {
         <Login onLogin={entranceLogin} />
       </Route>
       <Route>
-        {<Redirect to={`/${loggedIn ? 'cards' : 'sign-in'}`} />}
-      </Route>  
+        {loggedIn ? <Redirect to="/"/> : <Redirect to="/sign-in"/>}
+      </Route>
     </Switch>
-    </BrowserRouter>
 
     <Footer />
 

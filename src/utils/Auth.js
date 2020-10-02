@@ -5,7 +5,7 @@ export const register = (email, password) => {
     return fetch(`${apiUrlAuth}/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ password, email })
     })
       .then((res) => {
           if (res.ok) {
@@ -22,7 +22,7 @@ export const authorize = (email, password) => {
     return fetch(`${apiUrlAuth}/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ password, email })
     })
     .then((res) => {
         if (res.ok) {
@@ -32,6 +32,7 @@ export const authorize = (email, password) => {
             return Promise.reject(`Произошла ошибка: ${res.status}`);
         }
     })
+    .catch((err) => console.log(err));
 };
 
 export const saveToken = (token) => {
@@ -50,4 +51,5 @@ export const saveToken = (token) => {
               return Promise.reject(`Произошла ошибка: ${res.status}`);
           }
       })
+      .catch(err => console.log(err)); 
 };
