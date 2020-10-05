@@ -36,6 +36,7 @@ function Register(props) {
               type="email"
               placeholder="Email"
               onChange={handleEmailRegister}
+              value={email || ''}
               required
             />
             <input
@@ -44,6 +45,7 @@ function Register(props) {
               type="password"
               placeholder="Пароль"
               onChange={handlePasswordRegister}
+              value={password || ''}
               required
             />
             <button className="popup__button login__button" type="submit">Зарегистрироваться</button>

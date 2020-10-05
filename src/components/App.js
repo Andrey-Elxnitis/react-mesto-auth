@@ -34,13 +34,16 @@ function App() {
   });
 
   // история для переброски пользователя
-  let history = useHistory();
+  const history = useHistory();
 
   //стейт переменная для хранения email пользователя
   const [user, setUser] = useState('');
 
   //стейт-переменная для отображения "сохранение..."
   const [isLoading, setIsLoading] = useState(false);
+
+  // стейт переменная для попапа (ошибка или успешная регистрация)
+  const [error, setError] = useState(false);
 
   // состояние пользователя авторизации
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -231,7 +234,7 @@ function App() {
 
   React.useEffect(() => {
     tokenSave();
-  }, []);
+  },[]);
 
   // функция отвечает за авторизацию пользователя
   function updateLogin() {
@@ -263,6 +266,7 @@ function App() {
       history.push('/')
     })
     .catch((err) => {
+      setError(false)
       updateInfoTooltip();
       console.log(err);
     });
@@ -274,12 +278,13 @@ function App() {
     .then((res) => {
       if (res) {
         history.push('/');
-        setLoggedIn(true);
+        setError(true);
         updateInfoTooltip();
       }
     })
     .catch((err) => {
-      updateInfoTooltip()
+      setError(false);
+      updateInfoTooltip();
       console.log(err);
     });
   }
@@ -351,7 +356,7 @@ function App() {
     <InfoTooltip
       isOpen={isInfoTooltipOpen}
       onClose={closeAllPopups}
-      isLoggedIn={loggedIn}
+      isError={error}
     >
     </InfoTooltip>  
 

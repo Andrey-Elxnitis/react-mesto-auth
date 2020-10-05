@@ -14,7 +14,7 @@ export const register = (email, password) => {
           else {
               return Promise.reject(`Произошла ошибка: ${res.status}`);
           }
-      })
+      });
 };
 
 // функция отвечает за авторизацию пользователя
@@ -31,8 +31,7 @@ export const authorize = (email, password) => {
         else {
             return Promise.reject(`Произошла ошибка: ${res.status}`);
         }
-    })
-    .catch((err) => console.log(err));
+    });
 };
 
 export const saveToken = (token) => {
@@ -50,6 +49,5 @@ export const saveToken = (token) => {
           else {
               return Promise.reject(`Произошла ошибка: ${res.status}`);
           }
-      })
-      .catch(err => console.log(err)); 
+      });
 };

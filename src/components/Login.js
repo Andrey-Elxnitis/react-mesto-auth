@@ -39,6 +39,7 @@ function Login(props) {
               type="email"
               placeholder="Email"
               onChange={handleEmail}
+              value={email || ''}
               required
             />
             <input
@@ -47,6 +48,7 @@ function Login(props) {
               type="password"
               placeholder="Пароль"
               onChange={handlePassword}
+              value={password || ''}
               required
             />
             <button className="popup__button login__button" type="submit">Войти</button>

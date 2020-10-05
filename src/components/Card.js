@@ -82,7 +82,7 @@ function Card(props) {
           </span>
           </div>
           </div>
-          </div>
+        </div>
     )
 }
 
