@@ -1,4 +1,4 @@
-import { apiOption } from './utils';
+import { apiOption} from './utils';
 
 export class Api {
     constructor(data) {
@@ -70,12 +70,12 @@ export class Api {
     //метод добавляет или удаляет лайк
     changeLikeCardStatus(id, isLiked) {
         if (isLiked) {
-            return this._sendRequest(`/cards/likes/${id}`, {
+            return this._sendRequest(`/cards/${id}/likes`, {
                 method: 'PUT',
                 headers: this.headers
             })
         } else {
-            return this._sendRequest(`/cards/likes/${id}`, {
+            return this._sendRequest(`/cards/${id}/likes`, {
                 method: 'DELETE',
                 headers: this.headers
             })

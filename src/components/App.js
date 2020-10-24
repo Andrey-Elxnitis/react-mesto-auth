@@ -65,9 +65,11 @@ function App() {
       }
     }
 
+    // вешаем слушатели
     document.addEventListener('click', closeOverlay);
     document.addEventListener('keydown', handleEscClose);
 
+    // удаляем слушатели
     return () => {
       document.removeEventListener('keydown', handleEscClose);
       document.removeEventListener('click', closeOverlay);
@@ -76,6 +78,7 @@ function App() {
 
   //запрашиваем данные пользователя с сервера
   React.useEffect(() => {
+    if (loggedIn) {
     api.getUserInfo()
     .then((data) => {
       setCurrenUser(data);
@@ -83,7 +86,8 @@ function App() {
     .catch((err) => {
       console.log(`Произошла ошибка: ${err}`);
     });
-  }, []);
+  }
+  }, [loggedIn]);
 
   //функция обновляет данные пользователя
   function handleUpdateUser(data) {
@@ -122,6 +126,7 @@ function App() {
 
   //запрашиваем массив карточек с сервера
   React.useEffect(() => {
+    if (loggedIn) {
     api.getCards()
     .then((data) => {
       setCards(data);
@@ -129,7 +134,8 @@ function App() {
     .catch((err) => {
       console.log(`Произошла ошибка: ${err}`);
     });
-  }, []);
+  }
+  }, [loggedIn]);
 
   //функция отправки новой карточки на сервер
   function handleAddPlaceSubmit(data) {
@@ -150,7 +156,7 @@ function App() {
   //функция отрисовки лайка
   function handleCardLike(card) {
     //проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     
     // Отправляем запрос на сервер и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked)
@@ -168,7 +174,7 @@ function App() {
   //функция удаления карточки
   function handleCardDelete(card) {
     //проверяем карточку, добавлена ли она текущем пользователем
-    const isOwn = card.owner._id === currentUser._id;
+    const isOwn = card.owner === currentUser._id;
     
     // Отправляем запрос на сервер и получаем обновлённые данные карточки
     api.deleteCard(card._id, !isOwn)
@@ -223,7 +229,7 @@ function App() {
       saveToken(jwt)
       .then((res) => {
         if (res) {
-          setUser(res.data.email)
+          setUser(res.email)
           setLoggedIn(true);
           history.push('/');
         }
@@ -246,7 +252,7 @@ function App() {
     setInfoTooltipOpen(true);
   }
   
-  // функция отвечает за выход пользователя из прилажения
+  // функция отвечает за выход пользователя из приложения
   function exitAuth() {
     localStorage.removeItem('jwt');
     setUser('')

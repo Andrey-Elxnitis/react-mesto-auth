@@ -21,7 +21,10 @@ export const register = (email, password) => {
 export const authorize = (email, password) => {
     return fetch(`${apiUrlAuth}/signin`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          Accept: 'application/json',
+          'Content-Type': 'application/json' 
+        },
         body: JSON.stringify({ password, email })
     })
     .then((res) => {
@@ -31,9 +34,17 @@ export const authorize = (email, password) => {
         else {
             return Promise.reject(`Произошла ошибка: ${res.status}`);
         }
-    });
+    })
+    .then((data) => {
+        localStorage.setItem('jwt', data.token);
+        return data;
+    })
+    .catch((err) => {
+        console.log(err.message);
+    })
 };
 
+// при загрузке сайта запрашиваем данные пользователя
 export const saveToken = (token) => {
     return fetch(`${apiUrlAuth}/users/me`, {
         method: 'GET',
@@ -44,10 +55,15 @@ export const saveToken = (token) => {
     })
       .then((res) => {
           if (res.ok) {
-              return res.json();
+            return res.json();
           }
-          else {
-              return Promise.reject(`Произошла ошибка: ${res.status}`);
-          }
-      });
+          return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .then((data) => {
+          return data;
+      })
+      .catch((err) => {
+          console.log(err);
+          return Promise.reject(`Ошибка: ${err.status}`);
+      })
 };

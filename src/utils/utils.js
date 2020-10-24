@@ -1,11 +1,12 @@
 //идентификационные данные для работы с сервером
+export const apiUrlAuth = 'https://api.elxnitis.students.nomoreparties.xyz';
+
+const jwt = localStorage.getItem('jwt');
+
 export const apiOption = {
-    apiUrl: 'https://mesto.nomoreparties.co/v1/cohort-13',
+    apiUrl: 'https://api.elxnitis.students.nomoreparties.xyz',
     headers: {
-        authorization: 'e66cf1b3-dadb-44df-be8a-bb3ba2569396',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${jwt}`
     }
 }
-
-// адрес сервера для авторизации
-export const apiUrlAuth = 'https://auth.nomoreparties.co';
