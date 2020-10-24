@@ -4,7 +4,7 @@
 
 Ссылка на сайт размещенный на GitHub Pages [Mesto](https://andrey-elxnitis.github.io/react-mesto-auth/index.html).
 
-Ссылка на сайт размещенный на хостинге [Mesto](https://https://elxnitis.students.nomoreparties.xyz)
+Ссылка на сайт размещенный на хостинге [Mesto](https://elxnitis.students.nomoreparties.xyz)
 
 Проект выполнен в рамках обучения в Яндекс Практикум
 
