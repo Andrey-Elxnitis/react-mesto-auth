@@ -2,7 +2,9 @@
 
 ## проект Mesto-react
 
-Ссылка на сайт [Mesto-react](https://andrey-elxnitis.github.io/react-mesto-auth/index.html).
+Ссылка на сайт размещенный на GitHub Pages [Mesto](https://andrey-elxnitis.github.io/react-mesto-auth/index.html).
+
+Ссылка на сайт размещенный на хостинге [Mesto](https://https://elxnitis.students.nomoreparties.xyz)
 
 Проект выполнен в рамках обучения в Яндекс Практикум
 
@@ -14,7 +16,7 @@
 
 Данные пользователя и карточки приходят с сервера.
 
-Карточки видны только авторизованным пользователям.
+Для пользования приложением необходима регистрация.
 
 1. Изменение данных пользователя.
 2. Есть возвможность добавить новую карточку.

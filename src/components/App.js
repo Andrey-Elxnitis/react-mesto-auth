@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Header from './Header.js';
 import Main from './Main.js';
@@ -75,6 +75,64 @@ function App() {
       document.removeEventListener('click', closeOverlay);
     }
   });
+
+  // сохраняем токен в локальном хранилище
+  const tokenSave = () => {
+    const jwt = localStorage.getItem('jwt');
+
+    if (jwt) {
+      saveToken(jwt)
+      .then((res) => {
+        if (res) {
+          setUser(res.email)
+          setLoggedIn(true);
+          history.push('/');
+        }
+      })
+      .catch((err) => console.log(err));
+    }
+  }
+
+  // проверяем наличие токена в локальном хранилище
+  React.useEffect(() => {
+    tokenSave();
+  },[]);
+
+  // функция отвечает за регистрацию пользователя
+  function registerUser(email, password) {
+    register(email, password)
+    .then((res) => {
+      if (res) {
+        history.push('/');
+        setError(true);
+        updateInfoTooltip();
+      }
+    })
+    .catch((err) => {
+      setError(false);
+      updateInfoTooltip();
+      console.log(err);
+    });
+  }
+
+  // функция отвечает за авторизацию пользователя
+  function entranceLogin(email, password, setEmail, setPassword) {
+    authorize(email, password)
+    .then((res) => {
+      localStorage.setItem('jwt', res.token);
+      tokenSave();
+      setUser(email);
+      setEmail('');
+      setPassword('');
+      updateLogin();
+      history.push('/')
+    })
+    .catch((err) => {
+      setError(false)
+      updateInfoTooltip();
+      console.log(err);
+    });
+  } 
 
   //запрашиваем данные пользователя с сервера
   React.useEffect(() => {
@@ -221,27 +279,6 @@ function App() {
     });
   }
 
-  // сохраняем токен в локальном хранилище
-  const tokenSave = () => {
-    const jwt = localStorage.getItem('jwt');
-
-    if (jwt) {
-      saveToken(jwt)
-      .then((res) => {
-        if (res) {
-          setUser(res.email)
-          setLoggedIn(true);
-          history.push('/');
-        }
-      })
-      .catch((err) => console.log(err));
-    }
-  }
-
-  React.useEffect(() => {
-    tokenSave();
-  },[]);
-
   // функция отвечает за авторизацию пользователя
   function updateLogin() {
     setLoggedIn(true);
@@ -260,41 +297,6 @@ function App() {
     history.push('/sign-in');
   }
   
-  // функция отвечает за авторизацию пользователя
-  function entranceLogin(email, password, setEmail, setPassword) {
-    authorize(email, password)
-    .then((res) => {
-      localStorage.setItem('jwt', res.token);
-      setUser(email);
-      setEmail('');
-      setPassword('');
-      updateLogin();
-      history.push('/')
-    })
-    .catch((err) => {
-      setError(false)
-      updateInfoTooltip();
-      console.log(err);
-    });
-  } 
-
-  // функция отвечает за регистрацию пользователя
-  function registerUser(email, password) {
-    register(email, password)
-    .then((res) => {
-      if (res) {
-        history.push('/');
-        setError(true);
-        updateInfoTooltip();
-      }
-    })
-    .catch((err) => {
-      setError(false);
-      updateInfoTooltip();
-      console.log(err);
-    });
-  }
-
   //возвращаем разметку страницы, которую добавляем в DOM
   return (
     <CurrentUserContext.Provider value={currentUser}>

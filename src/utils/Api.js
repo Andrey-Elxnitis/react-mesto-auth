@@ -22,7 +22,10 @@ export class Api {
     //метод запроса информации о пользователе с сервера
     getUserInfo() {
         return this._sendRequest(`/users/me`, {
-            headers: this.headers
+            headers: {
+              'Content-Type': 'application/json',
+              authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
         })
     }
 
@@ -51,7 +54,10 @@ export class Api {
     getCards() {
         return this._sendRequest(`/cards`, {
             method: 'GET',
-            headers: this.headers
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
         })
     }
 
