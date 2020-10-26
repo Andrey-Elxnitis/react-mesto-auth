@@ -21,8 +21,7 @@
 
 @media screen and (max-width: 550px) {
     .header__link {
-        width: 42px;
-        font-size: 14px;
-        line-height: 17px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
