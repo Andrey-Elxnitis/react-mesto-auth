@@ -14,12 +14,14 @@ function Header(props) {
       <header className="header">
         <div className="header__logo" style={{backgroundImage: `url(${logo})`}}></div>
         <nav className="header__navigation">
+          <div className="header__links">
           <Route path="/sign-up">
             <Link to="/sign-in" className="header__link">Войти</Link>
           </Route>
           <Route path="/sign-in">
             <Link to="/sign-up" className="header__link">Регистрация</Link>
           </Route>
+          </div>
           <Route exact path="/">
             <div className="header__info">
               <p className="header__email">{user}</p>

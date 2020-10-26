@@ -1,0 +1,8 @@
+@media screen and (max-width: 550px) {
+    .header__links {
+        width: 115px;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
