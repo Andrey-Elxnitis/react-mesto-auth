@@ -6,7 +6,6 @@
     grid-row: 1/2;
     margin-top: 19px;
     position: relative;
-    transition: all 1s ease-in-out;
     border: 1px solid #fff;
     box-sizing: border-box;
     background-image: url(../../../images/Edit-Button.png);

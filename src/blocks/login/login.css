@@ -10,3 +10,12 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+@media screen and (max-width: 550px) {
+    .login {
+        width: 260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}

@@ -12,3 +12,17 @@
 .header__link:hover {
     opacity: 0.6;
 }
+
+@media screen and (max-width: 910px) {
+    .header__link {
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .header__link {
+        width: 42px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

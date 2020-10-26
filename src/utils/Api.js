@@ -3,7 +3,6 @@ import { apiOption} from './utils';
 export class Api {
     constructor(data) {
         this.apiUrl = data.apiUrl;
-        this.headers = data.headers;
     }
 
     //метод отправки запроса
@@ -33,7 +32,10 @@ export class Api {
     sendUserInfo(newUserInfo) {
         return this._sendRequest(`/users/me`, {
             method: 'PATCH',
-            headers: this.headers,
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            },
             body: JSON.stringify({
                 name: newUserInfo.name,
                 about: newUserInfo.about
@@ -46,7 +48,10 @@ export class Api {
         return this._sendRequest(`/users/me/avatar`, {
             method: 'PATCH',
             body: JSON.stringify({ avatar: avatar.avatar }),
-            headers: this.headers
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
         })
     }
 
@@ -69,7 +74,10 @@ export class Api {
                 name: card.name,
                 link: card.link
             }),
-            headers: this.headers
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            } 
         })
     }
 
@@ -78,12 +86,18 @@ export class Api {
         if (isLiked) {
             return this._sendRequest(`/cards/${id}/likes`, {
                 method: 'PUT',
-                headers: this.headers
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('jwt')}`
+                }
             })
         } else {
             return this._sendRequest(`/cards/${id}/likes`, {
                 method: 'DELETE',
-                headers: this.headers
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('jwt')}`
+                }
             })
         }
     }
@@ -93,7 +107,10 @@ export class Api {
         if (!isOwn) {
         return this._sendRequest(`/cards/${id}`, {
             method: 'DELETE',
-            headers: this.headers
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
         })
       }
     }

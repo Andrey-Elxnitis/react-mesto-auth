@@ -3,4 +3,6 @@
     background-color: #ffffff;
     color: #000000;
     margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
 }

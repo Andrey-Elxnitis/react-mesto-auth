@@ -11,3 +11,10 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+@media screen and (max-width: 550px) {
+    .header__email {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

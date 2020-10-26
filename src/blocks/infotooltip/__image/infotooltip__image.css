@@ -6,5 +6,11 @@
     margin-right: auto;
     margin-bottom: 32px;
     position: relative;
-    z-index: 5;
+}
+
+@media screen and (max-width: 550px) {
+    .infotooltip__image {
+        width: 90px;
+        height: 90px;
+    }
 }
